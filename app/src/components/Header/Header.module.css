@@ -1,0 +1,10 @@
+.title {
+    display: flex;
+    flex-direction: column;
+    height: 70px;
+    background-color: rgb(78, 76, 76);
+    color: antiquewhite;
+    text-align: center;
+    justify-content: center;
+    font-size: 170%;
+}

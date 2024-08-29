@@ -1,5 +1,10 @@
-import { Inter } from "next/font/google";
+// Import the global CSS directly
 import "./globals.css";
+import { Inter } from "next/font/google";
+
+import Home from './page'
+import Header from '../app/src/components/Header/Header.jsx'
+import QuestionCards from "./src/components/QuestionCards/QuestionCards";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,7 +16,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        {/* Metadata */}
+      </head>
+      <body className={inter.className}>
+        <div className='wrapper'>
+          <Header/>
+            <main>{children}</main>
+          </div>
+      </body>
     </html>
   );
 }
