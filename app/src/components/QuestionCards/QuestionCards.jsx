@@ -1,8 +1,20 @@
+"use client";
+
 import React from 'react'
 import styles from './questionCards.module.css'
+import {useState} from "react"
+import Success from '../SuccessScreen/SuccessScreen'
+
 
 export default function QuestionCards () {
-    return (
+
+    const [submit, setSubmit] = useState(false)
+
+    const handleClick = () => {
+      setSubmit(true)
+    }
+        
+    return (    
     <div className={styles.wrapper}>
         <div className={styles.form}>
             <legend className={styles.title}>Question 1</legend>
@@ -36,10 +48,17 @@ export default function QuestionCards () {
             </div>
             <button 
                 className={styles.button} 
-                type="submit">
+                type="submit"
+                onClick={handleClick}>
                     Submit answer
             </button>
         </div>
+        <p className={styles.submit}>{submit && <Success/>}</p>
     </div>
 )
 }
+
+// export default function Header() {
+//     const [menu, setMenu] = useState(false)
+  
+  
