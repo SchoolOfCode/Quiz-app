@@ -1,19 +1,46 @@
 .title {
-    color: blue;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: white;
 }
 
 .form {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 90vh;
+    padding-left: 15px;
+    padding-right: 15px;
     text-align: center;
     font-size: 40px;
-    color: white;
+    color: rgb(255, 255, 255);
+}
+
+.answerGroup {
+    display: flex;
+    background-color: rgb(78, 76, 76);
+    border-radius: 8px;
+    align-items: center;
+    margin-bottom: 15px;
+    height: 60px;
+    width: 90%;
 }
 
 .text {
-    display: grid;
-    align-items:center ;
-    background-color: rgb(78, 76, 76);
-    color: aqua;
-    padding: 5%;
+    margin-left: 8px;
+    font-size: 20px;
+    color: white;
+}
+
+.button {
+    width: 90%;
+    height: 60px;
+    align-self: center;
+    margin-bottom: 20px;
+    background-color: #007AFF;
+    border-radius: 8px;
+
+    color: aliceblue;
+    font-size: 70%;
 }
