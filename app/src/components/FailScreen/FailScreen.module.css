@@ -13,3 +13,9 @@
     box-sizing: border-box; /* Includes padding within width/height */
     padding: 20px; /* Optional padding for content */
 }
+
+.text {
+    margin-left: 8px;
+    font-size: 20px;
+    color: white;
+}
