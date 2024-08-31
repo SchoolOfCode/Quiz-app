@@ -1,0 +1,15 @@
+.wrapper {
+    position: fixed; /* Fixes the position relative to the viewport */
+    top: 50%;
+    left: 50%;
+    background-color: red; /* Semi-transparent aqua background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 414px; /* Fixed width */
+    height: 100vh; /* Adjust height based on content */
+    z-index: 1000; /* Ensures it's above other content */
+    transform: translate(-50%, -50%); /* Centers the box */
+    box-sizing: border-box; /* Includes padding within width/height */
+    padding: 20px; /* Optional padding for content */
+}
