@@ -7,23 +7,37 @@ import Fail from '../FailScreen/FailScreen';
 
 export default function QuestionCards() {
     const [submit, setSubmit] = useState(false);
-    const [correctAnswer, setCorrectAnswer] = useState(null);  // Tracks if the correct answer is selected
-    const [answerSelected, setAnswerSelected] = useState(false);  // Tracks if any answer is selected
-    const [score, setScore] = useState(0);
+    const [correctAnswer, setCorrectAnswer] = useState(null);
+    const [answerSelected, setAnswerSelected] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [showFail, setShowFail] = useState(false);
+    const [score, setScore] = useState(1);
 
     const handleClick = (event) => {
         event.preventDefault();
         
         if (!answerSelected) {
-            setSubmit(true);  // Ensure it checks for selection before submitting
+            setSubmit(true);
             return;
         }
 
         setSubmit(true);
+
         if (correctAnswer) {
-            setScore(score + 1);  // Increment score only if the correct answer is selected
+            setScore(score + 1);
+            setShowSuccess(true);
+            setShowFail(false);
+        } else {
+            setShowFail(true);
+            setShowSuccess(false);
         }
-        console.log('Current Score:', score);  // Log the score to verify it's updating correctly
+
+        console.log('Current Score:', score);
+    };
+
+    const handleCloseScreens = () => {
+        setShowSuccess(false);
+        setShowFail(false);
     };
 
     return (
@@ -89,7 +103,12 @@ export default function QuestionCards() {
                 { 
                     !answerSelected && submit 
                         ? "Please select an answer" 
-                        : submit && (correctAnswer ? <Success/> : <Fail/>)
+                        : (
+                            <>
+                                {showSuccess && <Success onClose={handleCloseScreens} />}
+                                {showFail && <Fail onClose={handleCloseScreens} />}
+                            </>
+                        )
                 }
             </div>
         </div>

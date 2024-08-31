@@ -1,15 +1,14 @@
 "use client";
 
-import React from 'react'
-import styles from './SuccessScreen.module.css'
-import {useState} from "react"
+import React from 'react';
+import styles from './SuccessScreen.module.css';
 
-export default function SuccessScreen() {
+export default function SuccessScreen({ onClose }) {
     return (
         <div className={styles.wrapper}>
-            <div className={styles.text}>
-                Styled success screen
+            <div className={styles.text} onClick={onClose}>
+                Styled success screen - Click to close
             </div>
         </div>
-    )
+    );
 }
