@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import styles from './questionCards.module.css';
 import Success from '../SuccessScreen/SuccessScreen';
 import Fail from '../FailScreen/FailScreen';
+import Button from '../Button/Button'
 
 export default function QuestionCards() {
     const [submit, setSubmit] = useState(false);
