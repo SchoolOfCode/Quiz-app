@@ -1,11 +1,15 @@
+/* Button.module.css */
 .button {
-    width: 90%;
+    width: 310px;
     height: 60px;
-    align-self: center;
-    margin-bottom: 20px;
     background-color: #007AFF;
     border-radius: 8px;
-
     color: aliceblue;
-    font-size: 70%;
+    font-size: 25px;
+    border: none;
+    cursor: pointer;
+    position: absolute; /* Change this to 'absolute' or other positioning if needed */
+    bottom: 20px; /* Adjust if needed */
+    left: 50%;
+    transform: translateX(-50%);
 }

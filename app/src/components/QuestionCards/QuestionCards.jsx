@@ -92,14 +92,12 @@ export default function QuestionCards() {
                         }} 
                     />
                     <label className={styles.text} htmlFor="Answer4">Answer 4</label>
-                </div>
-                <button 
-                    className={styles.button} 
-                    type="submit"
+                </div></div>
+                <Button 
                     onClick={handleClick}>
                         Submit answer
-                </button>
-            </div>
+                </Button>
+            
             <div className={styles.submit}>
                 { 
                     !answerSelected && submit 

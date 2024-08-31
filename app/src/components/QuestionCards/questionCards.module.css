@@ -1,6 +1,5 @@
 .title {
     padding-top: 20px;
-    padding-bottom: 20px;
     color: white;
 }
 
@@ -9,7 +8,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    min-height: 90vh;
+    min-height: 70vh;
     padding-left: 15px;
     padding-right: 15px;
     text-align: center;
@@ -22,7 +21,6 @@
     background-color: rgb(78, 76, 76);
     border-radius: 8px;
     align-items: center;
-    margin-bottom: 15px;
     height: 60px;
     width: 90%;
 }
@@ -31,18 +29,6 @@
     margin-left: 8px;
     font-size: 20px;
     color: white;
-}
-
-.button {
-    width: 90%;
-    height: 60px;
-    align-self: center;
-    margin-bottom: 20px;
-    background-color: #007AFF;
-    border-radius: 8px;
-
-    color: aliceblue;
-    font-size: 70%;
 }
 
 .submit{
