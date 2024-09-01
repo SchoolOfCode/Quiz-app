@@ -12,7 +12,8 @@ export default function QuestionCards() {
     const [answerSelected, setAnswerSelected] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [showFail, setShowFail] = useState(false);
-    const [score, setScore] = useState(1);
+    const [score, setScore] = useState(0);
+    const correctAnswerVar = 'Answer1';
 
     const handleClick = (event) => {
         event.preventDefault();
@@ -25,7 +26,7 @@ export default function QuestionCards() {
         setSubmit(true);
 
         if (correctAnswer) {
-            setScore(score + 1);
+            setScore(prevScore => prevScore + 1);
             setShowSuccess(true);
             setShowFail(false);
         } else {
@@ -39,6 +40,8 @@ export default function QuestionCards() {
     const handleCloseScreens = () => {
         setShowSuccess(false);
         setShowFail(false);
+        setAnswerSelected(false)
+        setCorrectAnswer(null)
     };
 
     return (
@@ -104,8 +107,12 @@ export default function QuestionCards() {
                         ? "Please select an answer" 
                         : (
                             <>
-                                {showSuccess && <Success onClose={handleCloseScreens} />}
-                                {showFail && <Fail onClose={handleCloseScreens} />}
+                                {showSuccess && (<Success 
+                                onClose={handleCloseScreens}
+                                score={score} />)}
+                                {showFail && (<Fail 
+                                onClose={handleCloseScreens}
+                                correctAnswerVar={correctAnswerVar} />)}
                             </>
                         )
                 }
