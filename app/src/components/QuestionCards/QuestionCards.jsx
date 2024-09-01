@@ -107,7 +107,7 @@ export default function QuestionCards() {
                             setAnswerSelected(true);
                         }} 
                     />
-                    <label className={styles.text} htmlFor="Answer1">Answer 1</label>
+                    <label className={styles.text} htmlFor="Answer1">{questions[0].correctAnswer}</label>
                 </div>
                 <div className={styles.answerGroup}>
                     <input 
@@ -119,7 +119,7 @@ export default function QuestionCards() {
                             setAnswerSelected(true);
                         }} 
                     />
-                    <label className={styles.text} htmlFor="Answer2">Answer 2</label>
+                    <label className={styles.text} htmlFor="Answer2">{questions[0].incorrectAnswers[0]}</label>
                 </div>
                 <div className={styles.answerGroup}>
                     <input 
@@ -131,7 +131,7 @@ export default function QuestionCards() {
                             setAnswerSelected(true);
                         }} 
                     />
-                    <label className={styles.text} htmlFor="Answer3">Answer 3</label>
+                    <label className={styles.text} htmlFor="Answer3">{questions[0].incorrectAnswers[1]}</label>
                 </div>
                 <div className={styles.answerGroup}>
                     <input 
@@ -143,7 +143,7 @@ export default function QuestionCards() {
                             setAnswerSelected(true);
                         }} 
                     />
-                    <label className={styles.text} htmlFor="Answer4">Answer 4</label>
+                    <label className={styles.text} htmlFor="Answer4">{questions[0].incorrectAnswers[2]}</label>
                 </div></div>
                 <Button 
                     onClick={handleClick}>
