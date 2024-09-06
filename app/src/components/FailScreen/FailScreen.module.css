@@ -6,7 +6,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 414px; /* Fixed width */
+    width: 100%; /* Fixed width */
     height: 100vh; /* Adjust height based on content */
     z-index: 1000; /* Ensures it's above other content */
     transform: translate(-50%, -50%); /* Centers the box */

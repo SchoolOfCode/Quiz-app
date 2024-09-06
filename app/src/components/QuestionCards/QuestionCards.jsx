@@ -14,6 +14,8 @@ export default function QuestionCards() {
     const [showSuccess, setShowSuccess] = useState(false);
     const [showFail, setShowFail] = useState(false);
     const [score, setScore] = useState(0);
+    const [questionCount, setQuestionCount] = useState(1);
+    const [finished, setFinished] = useState(false);
 
        //api
     const [questions, setQuestions] = useState([])
@@ -22,15 +24,13 @@ export default function QuestionCards() {
 
     //random answer box
     const [correctAnswerBox, setCorrectAnswerBox] = useState(null)
-    
+
     function randomCorrectAnswer () {
         const correctAnswerSelector = Math.floor(Math.random() * 4);
         setCorrectAnswerBox(correctAnswerSelector)
         console.log('correctAnswerBox', correctAnswerSelector)
         return;
     }
-
-    //if correctAnswerSelector === 0 ? setSuccess(true) : setFail(true)
 
     const fetchQuestions = async () => {
         try {
@@ -71,13 +71,17 @@ export default function QuestionCards() {
 
         setSubmit(true);
 
-        if (pass) {
+        if (pass && questionCount < 6) {
             setScore(prevScore => prevScore + 1);
             setShowSuccess(true);
             setShowFail(false);
-        } else {
+            setQuestionCount(prevCount => prevCount + 1);
+        } else if (!pass && questionCount < 6) {
             setShowFail(true);
             setShowSuccess(false);
+            setQuestionCount(prevCount => prevCount + 1);
+        } else {
+            console.log('finished')
         }
 
         console.log('Current Score:', score);

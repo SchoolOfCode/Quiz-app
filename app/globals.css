@@ -9,8 +9,9 @@ body {
 
 /* Add a wrapper for the content */
 .wrapper {
-  width: 414px; /* Fixed width */
+  width: 100vw; /* Fixed width */
   background-color: black; /* Add a different background color if needed */
   display: flex;
   flex-direction: column; /* This keeps content stacked vertically */
 }
+
