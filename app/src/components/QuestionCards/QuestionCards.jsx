@@ -5,6 +5,7 @@ import styles from './questionCards.module.css';
 import Success from '../SuccessScreen/SuccessScreen';
 import Fail from '../FailScreen/FailScreen';
 import Button from '../Button/Button'
+import SubHeader from '../SubHeader/SubHeader';
 
 export default function QuestionCards() {
 
@@ -13,9 +14,13 @@ export default function QuestionCards() {
     const [answerSelected, setAnswerSelected] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [showFail, setShowFail] = useState(false);
-    const [score, setScore] = useState(0);
+    
     const [questionCount, setQuestionCount] = useState(1);
     const [finished, setFinished] = useState(false);
+
+        //Fail and score tracker
+    const [fail, setFail] = useState(0);
+    const [score, setScore] = useState(0);
 
        //api
     const [questions, setQuestions] = useState([])
@@ -70,13 +75,14 @@ export default function QuestionCards() {
         }
 
         setSubmit(true);
-
-        if (pass && questionCount < 6) {
+        //Pass / fail logic
+        if (pass && questionCount < 11 && fail < 6) {
             setScore(prevScore => prevScore + 1);
             setShowSuccess(true);
             setShowFail(false);
             setQuestionCount(prevCount => prevCount + 1);
-        } else if (!pass && questionCount < 6) {
+        } else if (!pass && questionCount < 11 && fail < 6) {
+            setFail(prevFail => prevFail + 1);
             setShowFail(true);
             setShowSuccess(false);
             setQuestionCount(prevCount => prevCount + 1);
@@ -106,7 +112,9 @@ export default function QuestionCards() {
     };
 
     return (
+        
 <div className={styles.wrapper}>
+    <SubHeader score ={score} />
     <div className={styles.form}>
         <legend className={styles.title}>{questions[0].question.text}</legend>
         
