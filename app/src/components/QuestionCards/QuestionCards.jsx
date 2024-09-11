@@ -7,6 +7,7 @@ import Fail from '../FailScreen/FailScreen';
 import Button from '../Button/Button'
 import SubHeader from '../SubHeader/SubHeader';
 import EndGame from '../EndGame/EndGame';
+import Timer from '../Timer/Timer';
 
 export default function QuestionCards() {
 
@@ -94,8 +95,6 @@ export default function QuestionCards() {
         } else {
             setEndGame(true);
         }
-
-
     };
 
     const handleCloseScreens = () => {
@@ -122,7 +121,7 @@ export default function QuestionCards() {
                 <EndGame score={score} />
             ) : (
                 <div>
-                    <SubHeader score={score} progress={questionCount} lives={lives} />
+                    <SubHeader score={score} progress={questionCount} lives={lives} timer={<Timer />}/>
                     <div className={styles.form}>
                         <legend className={styles.title}>{questions[0].question.text}</legend>
                         
