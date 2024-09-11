@@ -8,7 +8,6 @@ import SubHeader from "./src/components/SubHeader/SubHeader";
 export default function Home() {
   return (
     <main>
-      <SubHeader />
       <QuestionCards/>
     </main>
   );

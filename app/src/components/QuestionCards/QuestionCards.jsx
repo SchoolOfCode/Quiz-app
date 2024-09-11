@@ -6,6 +6,7 @@ import Success from '../SuccessScreen/SuccessScreen';
 import Fail from '../FailScreen/FailScreen';
 import Button from '../Button/Button'
 import SubHeader from '../SubHeader/SubHeader';
+import EndGame from '../EndGame/EndGame';
 
 export default function QuestionCards() {
 
@@ -14,13 +15,15 @@ export default function QuestionCards() {
     const [answerSelected, setAnswerSelected] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [showFail, setShowFail] = useState(false);
+    const [endGame, setEndGame] = useState(false);
     
-    const [questionCount, setQuestionCount] = useState(1);
-    const [finished, setFinished] = useState(false);
+    const [questionCount, setQuestionCount] = useState(0);
 
         //Fail and score tracker
-    const [fail, setFail] = useState(0);
     const [score, setScore] = useState(0);
+
+    //lives
+    const [lives, setLives] = useState(3);
 
        //api
     const [questions, setQuestions] = useState([])
@@ -76,21 +79,23 @@ export default function QuestionCards() {
 
         setSubmit(true);
         //Pass / fail logic
-        if (pass && questionCount < 11 && fail < 6) {
+        if (pass && questionCount < 11 && lives > 0) {
+            //Correct answer
             setScore(prevScore => prevScore + 1);
             setShowSuccess(true);
             setShowFail(false);
             setQuestionCount(prevCount => prevCount + 1);
-        } else if (!pass && questionCount < 11 && fail < 6) {
-            setFail(prevFail => prevFail + 1);
+        } else if (!pass && questionCount < 11 && lives > 0) {
+            //Incorrect answer
+            setLives(prevLives => prevLives - 1);
             setShowFail(true);
             setShowSuccess(false);
             setQuestionCount(prevCount => prevCount + 1);
         } else {
-            console.log('finished')
+            setEndGame(true);
         }
 
-        console.log('Current Score:', score);
+
     };
 
     const handleCloseScreens = () => {
@@ -112,85 +117,95 @@ export default function QuestionCards() {
     };
 
     return (
-        
-<div className={styles.wrapper}>
-    <SubHeader score ={score} />
-    <div className={styles.form}>
-        <legend className={styles.title}>{questions[0].question.text}</legend>
-        
-        <div className={styles.answerGroup}>
-            <input 
-                type="radio" 
-                id="Answer1" 
-                name="Answer" 
-                onClick={() => handleAnswerSelect(0)} 
-            />
-            <label className={styles.text} htmlFor="Answer1">
-                {correctAnswerBox === 0 ? questions[0].correctAnswer 
-                : questions[0].incorrectAnswers[0]}
-            </label>
-        </div>
-        
-        <div className={styles.answerGroup}>
-            <input 
-                type="radio" 
-                id="Answer2" 
-                name="Answer" 
-                onClick={() => handleAnswerSelect(1)} 
-            />
-            <label className={styles.text} htmlFor="Answer2">
-                {correctAnswerBox === 1 ? questions[0].correctAnswer 
-                : questions[0].incorrectAnswers[1]}
-            </label>
-        </div>
-        
-        <div className={styles.answerGroup}>
-            <input 
-                type="radio" 
-                id="Answer3" 
-                name="Answer" 
-                onClick={() => handleAnswerSelect(2)} 
-            />
-            <label className={styles.text} htmlFor="Answer3">
-                {correctAnswerBox === 2 ? questions[0].correctAnswer 
-                : questions[0].incorrectAnswers[2]}
-            </label>
-        </div>
-
-        <div className={styles.answerGroup}>
-            <input 
-                type="radio" 
-                id="Answer4" 
-                name="Answer" 
-                onClick={() => handleAnswerSelect(3)} 
-            />
-            <label className={styles.text} htmlFor="Answer4">
-                {correctAnswerBox === 3 ? questions[0].correctAnswer 
-                : questions[0].incorrectAnswers[0]}
-            </label>
-        </div>
-    </div>
-                <Button 
-                    onClick={handleClick}>
+        <div className={styles.wrapper}>
+            {endGame ? (
+                <EndGame score={score} />
+            ) : (
+                <div>
+                    <SubHeader score={score} progress={questionCount} lives={lives} />
+                    <div className={styles.form}>
+                        <legend className={styles.title}>{questions[0].question.text}</legend>
+                        
+                        <div className={styles.answerGroup}>
+                            <input 
+                                type="radio" 
+                                id="Answer1" 
+                                name="Answer" 
+                                onClick={() => handleAnswerSelect(0)} 
+                            />
+                            <label className={styles.text} htmlFor="Answer1">
+                                {correctAnswerBox === 0 ? questions[0].correctAnswer 
+                                : questions[0].incorrectAnswers[0]}
+                            </label>
+                        </div>
+                        
+                        <div className={styles.answerGroup}>
+                            <input 
+                                type="radio" 
+                                id="Answer2" 
+                                name="Answer" 
+                                onClick={() => handleAnswerSelect(1)} 
+                            />
+                            <label className={styles.text} htmlFor="Answer2">
+                                {correctAnswerBox === 1 ? questions[0].correctAnswer 
+                                : questions[0].incorrectAnswers[1]}
+                            </label>
+                        </div>
+                        
+                        <div className={styles.answerGroup}>
+                            <input 
+                                type="radio" 
+                                id="Answer3" 
+                                name="Answer" 
+                                onClick={() => handleAnswerSelect(2)} 
+                            />
+                            <label className={styles.text} htmlFor="Answer3">
+                                {correctAnswerBox === 2 ? questions[0].correctAnswer 
+                                : questions[0].incorrectAnswers[2]}
+                            </label>
+                        </div>
+    
+                        <div className={styles.answerGroup}>
+                            <input 
+                                type="radio" 
+                                id="Answer4" 
+                                name="Answer" 
+                                onClick={() => handleAnswerSelect(3)} 
+                            />
+                            <label className={styles.text} htmlFor="Answer4">
+                                {correctAnswerBox === 2 ? questions[0].correctAnswer 
+                                : questions[0].incorrectAnswers[2]}
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <Button onClick={handleClick}>
                         Submit answer
-                </Button>
-            
-            <div className={styles.submit}>
-                { 
-                    !answerSelected && submit 
-                        ? "Please select an answer" 
-                        : (
-                            <>
-                                {showSuccess && (<Success 
-                                onClose={handleCloseScreens}
-                                score={score} />)}
-                                {showFail && (<Fail 
-                                onClose={handleCloseScreens}
-                                correctAnswerVar={questions[0].correctAnswer} />)}
-                            </>
-                        )
-                }
-            </div>
+                    </Button>
+                
+                    <div className={styles.submit}>
+                        {!answerSelected && submit 
+                            ? "Please select an answer" 
+                            : (
+                                <>
+                                    {showSuccess && (
+                                        <Success 
+                                            onClose={handleCloseScreens}
+                                            score={score} 
+                                        />
+                                    )}
+                                    {showFail && (
+                                        <Fail 
+                                            onClose={handleCloseScreens}
+                                            correctAnswerVar={questions[0].correctAnswer} 
+                                        />
+                                    )}
+                                </>
+                            )
+                        }
+                    </div>
+                </div>
+            )}
         </div>
     );
-}
+}    
